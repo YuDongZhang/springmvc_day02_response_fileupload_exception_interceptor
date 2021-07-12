@@ -46,7 +46,15 @@ public class UserController {
         //request.getRequestDispatcher("/WEB-INF/pages/success.jsp").forward(request,response);
 
         //重定向 , 相当于重新发了请求 , 直接发请求 , 不能访问 web-inf , (转发可以)
-        response.sendRedirect(request.getContextPath()+"/index.jsp");
+//        response.sendRedirect(request.getContextPath()+"/index.jsp");
+
+        // 设置中文乱码
+        response.setCharacterEncoding("UTF-8");
+        response.setContentType("text/html;charset=UTF-8");
+
+        // 直接会进行响应 , 直接路径发请求 http://localhost:8080/springmvc_day02_01_response_war/testvoid
+        response.getWriter().print("你好");
+
         return;//不想让后面代码执行,return
     }
 }
