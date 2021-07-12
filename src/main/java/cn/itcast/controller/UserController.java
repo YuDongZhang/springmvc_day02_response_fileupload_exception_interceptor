@@ -4,6 +4,7 @@ import cn.itcast.domain.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -17,6 +18,7 @@ public class UserController {
 
     /**
      * 返回值是 string
+     *
      * @param model
      * @return
      */
@@ -36,7 +38,7 @@ public class UserController {
     /**
      * 默认是找 testVoid jsp
      * 返回值是void
-     *
+     * <p>
      * 请求转发是一次请求,不用编写项目名称
      */
     @RequestMapping("/testVoid")
@@ -57,4 +59,30 @@ public class UserController {
 
         return;//不想让后面代码执行,return
     }
+
+    /**
+     * 返回ModelAndView
+     *
+     * @return
+     */
+    @RequestMapping("/testModelAndView")
+    public ModelAndView testModelAndView() {
+        // 创建ModelAndView对象
+        ModelAndView mv = new ModelAndView();
+        System.out.println("testModelAndView方法执行了...");
+        // 模拟从数据库中查询出User对象
+        User user = new User();
+        user.setUsername("小凤");
+        user.setPassword("456");
+        user.setAge(30);
+
+        // 把user对象存储到mv对象中，也会把user对象存入到request对象
+        mv.addObject("user", user);
+
+        // 跳转到哪个页面
+        mv.setViewName("success");
+
+        return mv;
+    }
+
 }
