@@ -108,9 +108,15 @@ public class UserController {
      */
     @RequestMapping("/testAjax")
     public @ResponseBody
-    void testAjax(@RequestBody String body) {
+    User testAjax(@RequestBody User user) {
         System.out.println("testAjax方法执行了...");
-        System.out.println(body);
+        //客户端发送的 ajax 的请求,传的是json字符串,后端把json字符串封装到 use对象中
+        System.out.println(user);
+        //做响应模拟查询数据库
+        user.setUsername("haha");
+        user.setAge(40);
+        //做响应直接返回user
+        return user;
 
     }
 
