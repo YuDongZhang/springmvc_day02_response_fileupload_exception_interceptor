@@ -3,7 +3,9 @@ package cn.itcast.controller;
 import cn.itcast.domain.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.ServletException;
@@ -101,5 +103,15 @@ public class UserController {
         return "redirect:/index.jsp";
     }
 
+    /**
+     * 模拟异步请求响应
+     */
+    @RequestMapping("/testAjax")
+    public @ResponseBody
+    void testAjax(@RequestBody String body) {
+        System.out.println("testAjax方法执行了...");
+        System.out.println(body);
+
+    }
 
 }
