@@ -85,4 +85,21 @@ public class UserController {
         return mv;
     }
 
+    /**
+     * 使用关键字的方式进行转发或者重定向
+     *
+     * @return
+     */
+    @RequestMapping("/testForwardOrRedirect")
+    public String testForwardOrRedirect() {
+        System.out.println("testForwardOrRedirect方法执行了...");
+
+        // 请求的转发
+//         return "forward:/WEB-INF/pages/success.jsp";
+
+        // 重定向 , 不用加项目名称,框架已经帮你加好了
+        return "redirect:/index.jsp";
+    }
+
+
 }
