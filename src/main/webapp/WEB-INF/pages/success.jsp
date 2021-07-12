@@ -12,9 +12,7 @@
 </head>
 <body>
     <h3>入门成功</h3>
-    <h6>从request域对象中取值</h6>
-    ${user.username}
-    ${user.password}
+
 
 </body>
 </html>
