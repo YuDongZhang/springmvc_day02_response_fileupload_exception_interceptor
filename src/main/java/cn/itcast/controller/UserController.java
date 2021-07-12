@@ -43,7 +43,10 @@ public class UserController {
     public void testVoid(HttpServletRequest request, HttpServletResponse response) throws Exception {
         System.out.println("testVoid 方法执行了");
         //编写请求转发程序 , 手动调不会从控制器走
-        request.getRequestDispatcher("/WEB-INF/pages/success.jsp").forward(request,response);
+        //request.getRequestDispatcher("/WEB-INF/pages/success.jsp").forward(request,response);
+
+        //重定向 , 相当于重新发了请求 , 直接发请求 , 不能访问 web-inf , (转发可以)
+        response.sendRedirect(request.getContextPath()+"/index.jsp");
         return;//不想让后面代码执行,return
     }
 }
