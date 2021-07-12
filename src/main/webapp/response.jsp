@@ -12,6 +12,8 @@
 </head>
 <body>
     <a href="user/testString">testString</a>
+    <br>
+    <a href="user/testVoid">testVoid</a>
 
 </body>
 </html>

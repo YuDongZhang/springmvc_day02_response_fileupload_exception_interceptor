@@ -9,6 +9,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/user")
 public class UserController {
 
+    /**
+     * 返回值是 string
+     * @param model
+     * @return
+     */
     @RequestMapping("/testString")
     public String testString(Model model) {
         System.out.println("testString 方法执行了");
@@ -22,4 +27,14 @@ public class UserController {
         return "success";
     }
 
+    /**
+     * 默认是找 testVoid jsp
+     * 返回值是void
+     * @param model
+     */
+    @RequestMapping("/testVoid")
+    public void testVoid(Model model) {
+        System.out.println("testVoid 方法执行了");
+
+    }
 }
