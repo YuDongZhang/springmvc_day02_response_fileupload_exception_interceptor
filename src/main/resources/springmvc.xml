@@ -25,8 +25,29 @@
     <mvc:resources location="/images/" mapping="/images/**"/>
     <mvc:resources location="/js/" mapping="/js/**"/>
 
-    <!--配置异常处理器-->
-    <bean id="sysExceptionResolver" class="cn.itcast.exception.SysExceptionResolver"/>
+    <!--配置拦截器-->
+    <mvc:interceptors>
+        <!--配置拦截器-->
+        <mvc:interceptor>
+            <!-- 要拦截的具体的方法 -->
+            <mvc:mapping path="/user/*"/>
+            <!-- 不要拦截的方法 ,和上面的 配一个就可以 ,
+            <mvc:exclude-mapping path=""/>-->
+            <!-- 配置拦截器对象  -->
+            <bean class="cn.itcast.interceptor.MyInterceptor1"></bean>
+        </mvc:interceptor>
+
+        <!-- 配置第二个拦截器-->
+        <mvc:interceptor>
+            <!-- 要拦截的具体的方法 -->
+            <mvc:mapping path="/**"/>
+            <!-- 不要拦截的方法 ,和上面的 配一个就可以 ,
+            <mvc:exclude-mapping path=""/>-->
+            <!-- 配置拦截器对象  -->
+            <bean class="cn.itcast.interceptor.MyInterceptor2"></bean>
+        </mvc:interceptor>
+
+    </mvc:interceptors>
 
     <!-- 配置spring开启注解mvc的支持 -->
     <mvc:annotation-driven ></mvc:annotation-driven>
