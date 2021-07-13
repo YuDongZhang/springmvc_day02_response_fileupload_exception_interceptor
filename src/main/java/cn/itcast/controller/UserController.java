@@ -1,28 +1,25 @@
 package cn.itcast.controller;
 
 
-import com.sun.jersey.api.client.Client;
-import com.sun.jersey.api.client.WebResource;
-import org.apache.commons.fileupload.FileItem;
-import org.apache.commons.fileupload.disk.DiskFileItemFactory;
-import org.apache.commons.fileupload.servlet.ServletFileUpload;
+import cn.itcast.exception.SysException;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.multipart.MultipartFile;
-
-import javax.servlet.http.HttpServletRequest;
-import java.io.File;
-import java.util.List;
-import java.util.UUID;
 
 @Controller
 @RequestMapping("/user")
 public class UserController {
     @RequestMapping("/testException")
-    public String testException() throws Exception {
+    public String testException() throws SysException {
         System.out.println("testException方法执行了");
-        //模拟异常
-        int i = 10 / 0;
+        try {
+            //模拟异常
+            int i = 10 / 0;
+        } catch (Exception e) {
+            // 打印异常信息
+            e.printStackTrace();
+            // 抛出自定义异常信息
+            throw new SysException("查询所有用户出现错误了...");
+        }
         return "success";
     }
 }

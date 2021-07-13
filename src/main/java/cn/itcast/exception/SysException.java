@@ -3,9 +3,10 @@ package cn.itcast.exception;
 /**
  * 自定义的异常类
  */
-public class SysException {
+public class SysException extends Exception {
     // 存储提示信息的
     private String message;
+
 
     public String getMessage() {
         return message;
