@@ -1,6 +1,8 @@
 package cn.itcast.controller;
 
 
+import com.sun.jersey.api.client.Client;
+import com.sun.jersey.api.client.WebResource;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
@@ -17,7 +19,40 @@ import java.util.UUID;
 @RequestMapping("/user")
 public class UserController {
     /**
+     * 跨服务器文件上传
+     *
+     * @return
+     */
+    @RequestMapping("/fileupload3")
+    public String fileuoload3(MultipartFile upload) throws Exception {
+        System.out.println("跨服务器文件上传...");
+
+        // 定义上传文件服务器路径
+        String path = "http://localhost:9090/uploads/";
+
+        // 说明上传文件项
+        // 获取上传文件的名称
+        String filename = upload.getOriginalFilename();
+        // 把文件的名称设置唯一值，uuid
+        String uuid = UUID.randomUUID().toString().replace("-", "");
+        filename = uuid + "_" + filename;
+
+        // 创建客户端的对象
+        Client client = Client.create();
+
+        // 和图片服务器进行连接
+        WebResource webResource = client.resource(path + filename);
+
+        // 上传文件
+        webResource.put(upload.getBytes());
+
+        return "success";
+    }
+
+
+    /**
      * SpringMVC文件上传
+     *
      * @return
      */
     @RequestMapping("/fileupload2")
@@ -29,7 +64,7 @@ public class UserController {
         String path = request.getSession().getServletContext().getRealPath("/uploads/");
         // 判断，该路径是否存在
         File file = new File(path);
-        if(!file.exists()){
+        if (!file.exists()) {
             // 创建该文件夹
             file.mkdirs();
         }
@@ -39,13 +74,12 @@ public class UserController {
         String filename = upload.getOriginalFilename();
         // 把文件的名称设置唯一值，uuid
         String uuid = UUID.randomUUID().toString().replace("-", "");
-        filename = uuid+"_"+filename;
+        filename = uuid + "_" + filename;
         // 完成文件上传
-        upload.transferTo(new File(path,filename));
+        upload.transferTo(new File(path, filename));
 
         return "success";
     }
-
 
 
     /**
